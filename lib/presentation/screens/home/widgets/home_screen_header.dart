@@ -27,7 +27,7 @@ class HomeScreenHeader extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: AppTapAnimate(
-              onTap: context.read<HomeScreenCubit>().markAllRead,
+              onTap: context.read<HomeScreenCubit>().markRead,
               child: const Padding(
                 padding: EdgeInsets.only(right: 20),
                 child: Text(

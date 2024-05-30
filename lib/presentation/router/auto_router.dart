@@ -14,5 +14,9 @@ class AppRouter extends $AppRouter {
           path: '/',
           page: HomeRoute.page,
         ),
+        AdaptiveRoute(
+          path: '/article',
+          page: ArticleRoute.page,
+        ),
       ];
 }

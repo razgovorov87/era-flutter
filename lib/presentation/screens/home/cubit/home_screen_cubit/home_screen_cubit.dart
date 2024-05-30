@@ -36,10 +36,11 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     ));
   }
 
-  Future<void> markAllRead() async {
-    if (state.latestArticles.isEmpty) return;
+  Future<void> markRead([List<String>? articlesIds]) async {
+    if (state.latestArticles.isEmpty && (articlesIds == null || articlesIds.isEmpty)) return;
 
-    await _markReadedArticlesUseCase.execute(state.latestArticles.map((e) => e.id).toList());
+    await _markReadedArticlesUseCase.execute(
+        (articlesIds != null && articlesIds.isNotEmpty) ? articlesIds : state.latestArticles.map((e) => e.id).toList());
     await _fetchData();
   }
 }

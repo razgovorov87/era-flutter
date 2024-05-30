@@ -1,7 +1,10 @@
 import 'dart:math';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:era_flutter/domain/models/article.dart';
+import 'package:era_flutter/presentation/design/animations/app_tap_animate.dart';
+import 'package:era_flutter/presentation/router/auto_router.gr.dart';
 import 'package:era_flutter/presentation/screens/home/cubit/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,32 +115,42 @@ class _CarouselItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.network(
-            article.imageUrl,
-            fit: BoxFit.cover,
-          ),
-          Container(
-            color: Colors.black.withOpacity(0.6),
-          ),
-          Positioned(
-            bottom: 40 - (26 * zeroToMax),
-            left: 20,
-            right: 68,
-            child: Text(
-              article.title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 28,
-                color: Colors.white,
+    return AppTapAnimate(
+      onTap: () {
+        context.router.push(ArticleRoute(
+          article: article,
+          markRead: () {
+            context.read<HomeScreenCubit>().markRead([article.id]);
+          },
+        ));
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.network(
+              article.imageUrl,
+              fit: BoxFit.cover,
+            ),
+            Container(
+              color: Colors.black.withOpacity(0.6),
+            ),
+            Positioned(
+              bottom: 40 - (26 * zeroToMax),
+              left: 20,
+              right: 68,
+              child: Text(
+                article.title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 28,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
