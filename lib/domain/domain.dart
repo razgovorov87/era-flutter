@@ -1,2 +1,2 @@
 export 'models/models.dart';
-export 'repository/news_repository.dart';
+export 'repository/articles_repository.dart';

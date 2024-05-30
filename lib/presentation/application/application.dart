@@ -1,4 +1,5 @@
-import 'package:era_flutter/presentation/screens/home/home_screen.dart';
+import 'package:era_flutter/presentation/application/get_it/get_it_service_locator.dart';
+import 'package:era_flutter/presentation/router/auto_router.dart';
 import 'package:flutter/material.dart';
 
 class ForestVPNTestApp extends StatelessWidget {
@@ -6,10 +7,11 @@ class ForestVPNTestApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ForestVPN test',
+    return MaterialApp.router(
+      title: 'Era Test',
       theme: ThemeData(fontFamily: 'SFProText'),
-      home: const HomeScreen(),
+      routerConfig: getIt.get<AppRouter>().config(),
+      builder: (BuildContext context, Widget? child) => child ?? const SizedBox(),
     );
   }
 }
